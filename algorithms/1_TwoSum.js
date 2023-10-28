@@ -23,8 +23,4 @@ let res = twoSum([3,2,4], 6);
 
 console.log(res);
 
-/*
-This solution converts the array to a map and sequentially checks if
-the needed value has a correlated index in the map
-*/
 
