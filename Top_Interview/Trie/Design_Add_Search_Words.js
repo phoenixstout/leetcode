@@ -18,7 +18,7 @@ WordDictionary.prototype.addWord = function (word) {
       curr = curr[letter];
     }
   }
-  curr.isEnd = true;
+  curr.isEnd = true
 };
 
 /**
@@ -31,24 +31,35 @@ WordDictionary.prototype.search = function (word) {
   let q = new Queue();
   q.enqueue([curr, p]);
 
-  while (!q.isEmpty()) {
-    [curr, p] = q.dequeue();
-    if(word[p] == undefined && curr.isEnd) return true
-    if (word[p] === ".") {
-      for (let key of Object.keys(curr)) {
-        q.enqueue([curr[key], p + 1]);
+  while(!q.isEmpty()) {
+    [curr, p] = q.dequeue()
+    if(word[p] == undefined) {
+      if(curr.isEnd) return true
+      else continue
+    }
+    if(Object.keys(curr).length == 1 && curr.isEnd) continue
+    if(word[p] === '.') {
+      for(let child of Object.keys(curr)) {
+        if(child != 'isEnd') {
+          q.enqueue([curr[child], p+1])
+        }
       }
-    } else {
-      if (curr[word[p]]) {
-        q.enqueue([curr[word[p]], p+1])
-      } else return false;
+    }
+    else { // if word[p] is letter
+      if(!curr[word[p]]) {
+        word[p]
+        continue
+      }
+      q.enqueue([curr[word[p]], p+1])
     }
   }
-  if(curr.isEnd) return true
-  else return false
+  return false
 };
 
 var obj = new WordDictionary();
-obj.addWord("hi");
-console.log(obj);
-obj.search("..");
+obj.addWord("at");
+obj.addWord("and");
+obj.addWord("an");
+obj.addWord("add");
+obj.addWord("bat");
+obj.search('bat')
