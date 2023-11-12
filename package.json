@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@datastructures-js/queue": "^4.2.3"
+  }
+}
